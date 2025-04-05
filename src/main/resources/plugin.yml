@@ -1,0 +1,4 @@
+name: ChestLootRandomizer
+version: '1.0-SNAPSHOT'
+main: com.github.gyari03.LootRandomizer.chestLootRandomizer.ChestLootRandomizer
+api-version: '1.21'
