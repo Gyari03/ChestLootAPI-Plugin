@@ -39,6 +39,23 @@ public class SearchChestsCommand implements CommandExecutor {
                 toX = Integer.parseInt(args[3]);
                 toY = Integer.parseInt(args[4]);
                 toZ =Integer.parseInt(args[5]);
+
+                // Ha fromCoord nagyobb lenne mint toCoord az elrontja a 3-as loopot ezért:
+                if (fromX > toX) {
+                    int temp = fromX;
+                    fromX = toX;
+                    toX = temp;
+                }
+                if (fromY > toY) {
+                    int temp = fromY;
+                    fromY = toY;
+                    toY = temp;
+                }
+                if (fromZ > toZ) {
+                    int temp = fromZ;
+                    fromZ = toZ;
+                    toZ = temp;
+                }
             }
             else{
                 player.sendMessage(ChatColor.RED + "Please specify a valid argument!");
