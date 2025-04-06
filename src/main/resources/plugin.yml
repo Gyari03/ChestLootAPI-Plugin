@@ -2,3 +2,13 @@ name: ChestLootRandomizer
 version: '1.0-SNAPSHOT'
 main: com.github.gyari03.LootRandomizer.chestLootRandomizer.ChestLootRandomizer
 api-version: '1.21'
+commands:
+  search_chests:
+    description: "Search for chests within a specified region."
+    usage: "/<command> <x1> <y1> <z1> <x2> <y2> <z2>"
+    permission: permission.admin
+    permission-message: "You do not have the permission to use this command"
+permissions:
+  permission.admin:
+    description: "Allows ChestLootRandomizer admin configuration commands"
+    default: op
