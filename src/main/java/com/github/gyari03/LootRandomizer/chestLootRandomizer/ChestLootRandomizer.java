@@ -7,7 +7,7 @@ public final class ChestLootRandomizer extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-
+        getLogger().info("ChestLootRandomizer has been enabled!");
     }
 
     @Override
