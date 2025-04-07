@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+    implementation 'com.google.code.gson:gson:2.8.8' // Gson
 }
 
 tasks {
@@ -31,7 +32,9 @@ tasks {
     }
 
     jar{
-        destinationDirectory = file('C:/Paper 1.21.4/plugins') //destination
+        def destination = file('C:/Paper 1.21.4/plugins')
+        destination.mkdirs();
+        destinationDirectory = destination //destination
         from sourceSets.main.output  // Include all compiled classes
     }
 }

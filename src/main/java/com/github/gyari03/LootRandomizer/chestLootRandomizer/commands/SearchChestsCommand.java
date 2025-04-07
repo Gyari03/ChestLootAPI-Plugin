@@ -1,5 +1,6 @@
 package com.github.gyari03.LootRandomizer.chestLootRandomizer.commands;
 import com.github.gyari03.LootRandomizer.chestLootRandomizer.util.Coordinate3D;
+import com.google.gson.Gson;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -7,6 +8,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +25,6 @@ public class SearchChestsCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if(sender instanceof Player){
             Player player = (Player) sender;
-
-
 
             if(!player.hasPermission("permission.admin")){
                 player.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
@@ -74,6 +77,20 @@ public class SearchChestsCommand implements CommandExecutor {
                 }
             }
         }
-        return true; //change me
+        saveLocations(new File("ChestLootRandomizer/chest_locations.json"));
+        return true;
+    }
+
+    public void saveLocations(File file){
+        try {
+            Gson gson = new Gson();
+            FileWriter writer = new FileWriter(file);
+            gson.toJson(chestLocations, writer);
+            writer.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException("Something wrong happened at the gson: " + e.getMessage());
+        }
+
     }
 }

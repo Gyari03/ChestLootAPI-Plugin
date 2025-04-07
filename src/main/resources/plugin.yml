@@ -8,6 +8,12 @@ commands:
     usage: "/<command> <x1> <y1> <z1> <x2> <y2> <z2>"
     permission: permission.admin
     permission-message: "You do not have the permission to use this command"
+
+  fill_chests:
+    description: "Fill chests that were found with search_chests"
+    usage: "/fill_chests"
+    permission: permission.admin
+    permission-message: "You do not have the permission to use this command"
 permissions:
   permission.admin:
     description: "Allows ChestLootRandomizer admin configuration commands"

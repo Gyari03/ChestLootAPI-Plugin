@@ -11,6 +11,19 @@ public class Coordinate3D {
         this.z = z;
     }
 
+    public Coordinate3D(String coords){
+        String[] coordsArray = coords.split(",");
+
+        if(coordsArray.length == 3){
+            this.x = Integer.parseInt(coordsArray[0].replaceAll("[^0-9]", ""));
+            this.y = Integer.parseInt(coordsArray[1].replaceAll("[^0-9]", ""));
+            this.z = Integer.parseInt(coordsArray[2].replaceAll("[^0-9]", ""));
+        }
+        else{
+            this.x = this.y = this.z = 0;
+        }
+    }
+
     public int getX() {
         return x;
     }
