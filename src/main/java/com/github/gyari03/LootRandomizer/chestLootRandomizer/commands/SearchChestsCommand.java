@@ -1,5 +1,6 @@
 package com.github.gyari03.LootRandomizer.chestLootRandomizer.commands;
 import com.github.gyari03.LootRandomizer.chestLootRandomizer.util.Coordinate3D;
+import com.github.gyari03.LootRandomizer.chestLootRandomizer.util.SerializeJson;
 import com.google.gson.Gson;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,6 +16,8 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.github.gyari03.LootRandomizer.chestLootRandomizer.util.SerializeJson.saveListToFile;
 
 public class SearchChestsCommand implements CommandExecutor {
     int fromX, fromY, fromZ;
@@ -77,20 +80,7 @@ public class SearchChestsCommand implements CommandExecutor {
                 }
             }
         }
-        saveLocations(new File("ChestLootRandomizer/chest_locations.json"));
+        SerializeJson.saveListToFile(chestLocations,new File("ChestLootRandomizer/chest_locations.json"));
         return true;
-    }
-
-    public void saveLocations(File file){
-        try {
-            Gson gson = new Gson();
-            FileWriter writer = new FileWriter(file);
-            gson.toJson(chestLocations, writer);
-            writer.close();
-
-        } catch (IOException e) {
-            throw new RuntimeException("Something wrong happened at the gson: " + e.getMessage());
-        }
-
     }
 }

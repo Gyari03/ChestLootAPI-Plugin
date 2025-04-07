@@ -1,6 +1,7 @@
 package com.github.gyari03.LootRandomizer.chestLootRandomizer.commands;
 
 import com.github.gyari03.LootRandomizer.chestLootRandomizer.util.Coordinate3D;
+import com.github.gyari03.LootRandomizer.chestLootRandomizer.util.SerializeJson;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import org.bukkit.ChatColor;
@@ -20,6 +21,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.github.gyari03.LootRandomizer.chestLootRandomizer.util.SerializeJson.loadListFromFile;
+
 public class FillChestsCommand implements CommandExecutor {
     List<Coordinate3D> chestLocations = new ArrayList<Coordinate3D>();
 
@@ -27,7 +30,7 @@ public class FillChestsCommand implements CommandExecutor {
         if(sender instanceof Player) {
             Player player = (Player) sender;
 
-            loadLocations(new File("ChestLootRandomizer/chest_locations.json"));
+            chestLocations = SerializeJson.loadListFromFile(new File("ChestLootRandomizer/chest_locations.json"),new TypeToken<List<Coordinate3D>>(){}.getType());
 
             for(Coordinate3D coord : chestLocations) {
                 player.sendMessage(ChatColor.DARK_PURPLE + "Chest here:" + coord.toString());
@@ -54,17 +57,5 @@ public class FillChestsCommand implements CommandExecutor {
             }
         }
         return true;
-    }
-
-    public void loadLocations(File file){
-        try{
-            Gson gson = new Gson();
-            FileReader reader = new FileReader(file);
-            Type listType = new TypeToken<List<Coordinate3D>>(){}.getType();
-            chestLocations = gson.fromJson(reader,listType);
-            reader.close();
-        } catch(IOException e){
-
-        }
     }
 }
