@@ -14,6 +14,19 @@ commands:
     usage: "/fill_chests"
     permission: permission.admin
     permission-message: "You do not have the permission to use this command"
+
+  list_chests:
+    description: "List all chests that were found with search_chests"
+    usage: "/list_chests"
+    permission: permission.admin
+    permission-message: "You do not have the permission to use this command"
+
+  inspect_chest:
+    description: "Inspect a chest on a given coordinate"
+    usage: "/inspect_chest <x> <y> <z>"
+    permission: permission.admin
+    permission-message: "You do not have the permission to use this command"
+
 permissions:
   permission.admin:
     description: "Allows ChestLootRandomizer admin configuration commands"

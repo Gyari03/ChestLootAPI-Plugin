@@ -29,11 +29,6 @@ public class SearchChestsCommand implements CommandExecutor {
         if(sender instanceof Player){
             Player player = (Player) sender;
 
-            if(!player.hasPermission("permission.admin")){
-                player.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
-                return false;
-            }
-
             if(args.length == 0){
                 player.sendMessage(ChatColor.RED + "You did not specify any arguments!");
                 return false;
