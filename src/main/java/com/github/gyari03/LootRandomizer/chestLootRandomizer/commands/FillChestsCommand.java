@@ -33,27 +33,7 @@ public class FillChestsCommand implements CommandExecutor {
             chestLocations = SerializeJson.loadListFromFile(new File("ChestLootRandomizer/chest_locations.json"),new TypeToken<List<Coordinate3D>>(){}.getType());
 
             for(Coordinate3D coord : chestLocations) {
-                player.sendMessage(ChatColor.DARK_PURPLE + "Chest here:" + coord.toString());
-
-                Block block = player.getWorld().getBlockAt(coord.getX(), coord.getY(), coord.getZ());
-
-                // Chest check
-                if(!(block.getState() instanceof Chest)) {
-                    player.sendMessage(ChatColor.RED + "It is not actually chest!!");
-                    continue;
-                }
-                Chest chest = (Chest) block.getState();
-
-                if(chest.getLootTable() == null) {
-                    player.sendMessage(ChatColor.RED + "It is a chest but NO loot table found!");
-                    continue;
-                }
-
-                LootTable lootTable = chest.getLootTable();
-                NamespacedKey lootTableKey = lootTable.getKey();
-                player.sendMessage(ChatColor.DARK_PURPLE + coord.toString() + " LootTable: " + lootTableKey.asString());
-
-
+                FillChestCommand.populateChest(coord, player);
             }
         }
         return true;

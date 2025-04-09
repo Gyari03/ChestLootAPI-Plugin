@@ -1,9 +1,6 @@
 package com.github.gyari03.LootRandomizer.chestLootRandomizer;
 
-import com.github.gyari03.LootRandomizer.chestLootRandomizer.commands.FillChestsCommand;
-import com.github.gyari03.LootRandomizer.chestLootRandomizer.commands.InspectChestCommand;
-import com.github.gyari03.LootRandomizer.chestLootRandomizer.commands.SearchChestsCommand;
-import com.github.gyari03.LootRandomizer.chestLootRandomizer.commands.ListChestsCommand;
+import com.github.gyari03.LootRandomizer.chestLootRandomizer.commands.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -22,6 +19,7 @@ public final class ChestLootRandomizer extends JavaPlugin {
         this.getCommand("fill_chests").setExecutor(new FillChestsCommand());
         this.getCommand("list_chests").setExecutor(new ListChestsCommand());
         this.getCommand("inspect_chest").setExecutor(new InspectChestCommand());
+        this.getCommand("fill_chest").setExecutor(new FillChestCommand());
     }
 
     @Override

@@ -27,6 +27,12 @@ commands:
     permission: permission.admin
     permission-message: "You do not have the permission to use this command"
 
+  fill_chest:
+    description: "Fill a chest with it's assigned loot table"
+    usage: "/fill_chest <x> <y> <z>"
+    permission: permission.admin
+    permission-message: "You do not have the permission to use this command"
+
 permissions:
   permission.admin:
     description: "Allows ChestLootRandomizer admin configuration commands"
