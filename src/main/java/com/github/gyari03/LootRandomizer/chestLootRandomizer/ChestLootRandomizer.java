@@ -20,6 +20,8 @@ public final class ChestLootRandomizer extends JavaPlugin {
         this.getCommand("list_chests").setExecutor(new ListChestsCommand());
         this.getCommand("inspect_chest").setExecutor(new InspectChestCommand());
         this.getCommand("fill_chest").setExecutor(new FillChestCommand());
+        this.getCommand("add_table").setExecutor(new AddTableCommand());
+        this.getCommand("clear_chest").setExecutor(new ClearChestCommmand());
     }
 
     @Override

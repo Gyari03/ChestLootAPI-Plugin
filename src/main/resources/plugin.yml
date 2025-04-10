@@ -33,6 +33,18 @@ commands:
     permission: permission.admin
     permission-message: "You do not have the permission to use this command"
 
+  add_table:
+    description: "Give a chest a loot table"
+    usage: "/add_table <x> <y> <z>"
+    permission: permission.admin
+    permission-message: "You do not have the permission to use this command"
+
+  clear_chest:
+    description: "Clear a chest's inventory"
+    usage: "/clear_chest <x> <y> <z>"
+    permission: permission.admin
+    permission-message: "You do not have the permission to use this command"
+
 permissions:
   permission.admin:
     description: "Allows ChestLootRandomizer admin configuration commands"
