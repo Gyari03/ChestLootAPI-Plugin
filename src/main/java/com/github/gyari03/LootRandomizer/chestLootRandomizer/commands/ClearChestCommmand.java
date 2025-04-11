@@ -2,6 +2,7 @@ package com.github.gyari03.LootRandomizer.chestLootRandomizer.commands;
 
 import com.github.gyari03.LootRandomizer.chestLootRandomizer.util.Coordinate3D;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
@@ -35,6 +36,8 @@ public class ClearChestCommmand implements CommandExecutor {
                 player.sendMessage(ChatColor.RED + chestLocation.toString() + ": Not a chest");
                 return false;
             }
+            block.setType(Material.AIR);
+            block.setType(Material.CHEST);
         }
         return true;
     }
