@@ -1,4 +1,10 @@
+import os
 
+plugins_path = input("Enter full path to your Paper server's plugins folder:").strip()
+
+plugins_path = plugins_path.replace('\\', '/')
+
+build_gradle_content = """
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
@@ -33,7 +39,7 @@ tasks {
     }
 
     jar{
-        def destination = file('C:/Paper 1.21.4/plugins')
+        def destination = file('__PLUGIN_PATH__')
         destination.mkdirs();
         destinationDirectory = destination //destination
         from sourceSets.main.output  // Include all compiled classes
@@ -67,3 +73,11 @@ processResources {
     }
 }
 
+"""
+
+build_gradle_content = build_gradle_content.replace('__PLUGIN_PATH__', plugins_path)
+
+with open("build.gradle", "w") as f:
+    f.write(build_gradle_content)
+
+print("build.gradle created")

@@ -35,7 +35,7 @@ commands:
 
   add_table:
     description: "Give a chest a loot table"
-    usage: "/add_table <x> <y> <z>"
+    usage: "/add_table <x> <y> <z> <namespace:path>"
     permission: permission.admin
     permission-message: "You do not have the permission to use this command"
 
