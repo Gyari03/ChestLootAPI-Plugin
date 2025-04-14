@@ -44,7 +44,7 @@
 3. Assign or change loot tables for the gathered chests using the `/add_table` command.
     - To load the official Minecraft loot table, use it like this: `minecraft:chests/simple_dungeon`
     - To use your own loot table, place a datapack into `Paper-server/world/datapacks`. An example datapack is included in the project, which you can place inside `/datapacks` and invoke with:  
-      `/add_table <x> <y> <z> gyari:test`
+      `/add_table <x> <y> <z> gyari:ExampleLootTable`
 4. After adding a loot table to all chests on a map where you needed save the map, so you can re-use it for replayability.
 
 ## ❗ Notes
