@@ -5,6 +5,7 @@ import com.github.gyari03.LootRandomizer.chestLootRandomizer.util.SerializeJson;
 import com.google.common.reflect.TypeToken;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
@@ -25,17 +26,25 @@ public class ListChestsCommand implements CommandExecutor {
 
             for(Coordinate3D chestLocation : chestLocations) {
                 Block block = player.getWorld().getBlockAt(chestLocation.getX(), chestLocation.getY(), chestLocation.getZ());
-                if(!(block.getState() instanceof Chest)) {
+                if(!(block.getState() instanceof Chest) && !(block.getState() instanceof Barrel)) {
                     player.sendMessage(ChatColor.DARK_GRAY + chestLocation.toString() +": Not a chest");
                     continue;
                 }
-                Chest chest = (Chest) block.getState();
 
-                if(chest.getLootTable() == null) {
+                LootTable lootTable = null;
+                if(block.getState() instanceof Chest) {
+                    Chest chest = (Chest) block.getState();
+                    lootTable = chest.getLootTable();
+                }
+                else if(block.getState() instanceof Barrel) {
+                    Barrel barrel = (Barrel) block.getState();
+                    lootTable = barrel.getLootTable();
+                }
+
+                if(lootTable == null) {
                     player.sendMessage(ChatColor.GOLD + chestLocation.toString() +": No loot table found");
                     continue;
                 }
-                LootTable lootTable = chest.getLootTable();
                 NamespacedKey lootTableKey = lootTable.getKey();
                 player.sendMessage(ChatColor.DARK_GREEN + chestLocation.toString() + ": " + lootTableKey.asString());
 

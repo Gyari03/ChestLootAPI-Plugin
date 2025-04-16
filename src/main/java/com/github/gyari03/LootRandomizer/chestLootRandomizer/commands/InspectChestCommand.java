@@ -4,6 +4,7 @@ import com.github.gyari03.LootRandomizer.chestLootRandomizer.util.Coordinate3D;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
@@ -37,27 +38,36 @@ public class InspectChestCommand implements CommandExecutor {
 
             Block block = player.getWorld().getBlockAt(chestLocation.getX(), chestLocation.getY(), chestLocation.getZ());
 
-            if(!(block.getState() instanceof Chest)) {
+            if(!(block.getState() instanceof Chest)  && !(block.getState() instanceof Barrel)) {
                 player.sendMessage(ChatColor.RED + chestLocation.toString() +": Not a chest");
                 return false;
             }
 
-            Chest chest = (Chest) block.getState();
+            LootTable lootTable = null;
+            Inventory inventory = null;
+            if(block.getState() instanceof Chest) {
+                Chest chest = (Chest) block.getState();
+                lootTable = chest.getLootTable();
+                inventory = chest.getInventory();
+            }
+            else if(block.getState() instanceof Barrel) {
+                Barrel barrel = (Barrel) block.getState();
+                lootTable = barrel.getLootTable();
+                inventory = barrel.getInventory();
+            }
 
 
-            if(chest.getLootTable() == null) {
+            if(lootTable == null) {
                 player.sendMessage(ChatColor.GOLD + chestLocation.toString() +": No loot table found");
             }else{
-                LootTable lootTable = chest.getLootTable();
                 NamespacedKey lootTableKey = lootTable.getKey();
                 player.sendMessage(ChatColor.DARK_GREEN + chestLocation.toString() + ": " + lootTableKey.asString());
             }
-
-            Inventory inventory = chest.getInventory();
-
-            for(ItemStack item : inventory.getContents()) {
-                if(item != null && item.getType() != Material.AIR) {
-                    player.sendMessage(item.getAmount() + " x " + item.getType().name());
+            if(inventory != null) {
+                for(ItemStack item : inventory.getContents()) {
+                    if(item != null && item.getType() != Material.AIR) {
+                        player.sendMessage(item.getAmount() + " x " + item.getType().name());
+                    }
                 }
             }
         }

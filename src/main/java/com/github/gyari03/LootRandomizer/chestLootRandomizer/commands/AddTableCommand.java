@@ -4,6 +4,7 @@ import com.github.gyari03.LootRandomizer.chestLootRandomizer.util.Coordinate3D;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
@@ -44,12 +45,13 @@ public class AddTableCommand implements CommandExecutor {
             Block block = player.getWorld().getBlockAt(chestLocation.getX(), chestLocation.getY(), chestLocation.getZ());
 
 
-            if(!(block.getState() instanceof Chest)) {
+            if(!(block.getState() instanceof Chest)  && !(block.getState() instanceof Barrel)) {
                 player.sendMessage(ChatColor.RED + chestLocation.toString() +": Not a chest");
                 return false;
             }
 
-            Chest chest = (Chest) block.getState();
+
+
 
             NamespacedKey key = new NamespacedKey(lootTablenamespace, lootTablekey);
             LootTable customLootTable = Bukkit.getLootTable(key);
@@ -57,13 +59,19 @@ public class AddTableCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.RED + chestLocation.toString() +": Not an existing loot table");
                 return false;
             }
-            chest.setLootTable(customLootTable);
 
+            if(block.getState() instanceof Chest) {
+                Chest chest = (Chest) block.getState();
+                chest.setLootTable(customLootTable);
+                chest.update();
+            }
+            else if(block.getState() instanceof Barrel) {
+                Barrel barrel = (Barrel) block.getState();
+                barrel.setLootTable(customLootTable);
+                barrel.update();
+            }
 
-
-            chest.update();
             player.sendMessage(ChatColor.DARK_GREEN + chestLocation.toString() +": Loot table added");
-
 
         }
 

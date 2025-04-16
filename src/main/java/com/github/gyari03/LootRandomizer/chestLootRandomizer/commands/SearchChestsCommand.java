@@ -27,6 +27,7 @@ public class SearchChestsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if(sender instanceof Player){
+            chestLocations = new ArrayList<Coordinate3D>();
             Player player = (Player) sender;
 
             if(args.length == 0){
@@ -67,7 +68,8 @@ public class SearchChestsCommand implements CommandExecutor {
                 for(int j = fromY; j <= toY; j++){
                     for(int k = fromZ; k <= toZ; k++){
                         Block block = player.getWorld().getBlockAt(i, j, k);
-                        if(block.getType() == Material.CHEST){
+                        if(block.getType() == Material.CHEST || block.getType() == Material.BARREL){
+
                             chestLocations.add(new Coordinate3D(i, j, k));
                             player.sendMessage(ChatColor.GREEN + "Found chest at: " + chestLocations.getLast().toString());
                         }
@@ -78,4 +80,5 @@ public class SearchChestsCommand implements CommandExecutor {
         SerializeJson.saveListToFile(chestLocations,new File("ChestLootRandomizer/chest_locations.json"));
         return true;
     }
+
 }
